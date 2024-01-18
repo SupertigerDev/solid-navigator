@@ -1,7 +1,8 @@
+import { JSX } from 'solid-js'
 import { A, Outlet, Route, Router } from '../src'
 
 const Root = () => {
-  const styles = {
+  const styles: JSX.CSSProperties = {
     display: "flex",
     "flex-direction": "column",
     height: "100%"
