@@ -116,19 +116,19 @@ export function Router(props: RouterProps) {
 
   const onClick = (event: MouseEvent) => {
     const target = event.target as HTMLElement
-    if (target.tagName !== "A") return;
-    if (!target.hasAttribute("sn-link")) return;
-    event.preventDefault();
-    const href = target.getAttribute("href") || "";
-    navigate(href);
+    if (target.tagName !== 'A') return
+    if (!target.hasAttribute('sn-link')) return
+    event.preventDefault()
+    const href = target.getAttribute('href') || ''
+    navigate(href)
   }
 
   onMount(() => {
     window.addEventListener('popstate', onPopState)
-    document.addEventListener("click", onClick)
+    document.addEventListener('click', onClick)
     onCleanup(() => {
       window.removeEventListener('popstate', onPopState)
-      document.removeEventListener("click", onClick)
+      document.removeEventListener('click', onClick)
     })
   })
 
