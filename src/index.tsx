@@ -6,14 +6,20 @@ import { Route, RouteObject } from './Route'
 
 import { Router, useLocation, useParams, RouterProps } from './Router'
 
+import { A } from './Link'
+
+export type {
+  NavigateOptions,
+  RouteObject,
+  RouterProps,
+}
+
 export {
-  type NavigateOptions,
-  type RouteObject,
-  type RouterProps,
   useNavigate,
   Outlet,
   Route,
   Router,
   useLocation,
   useParams,
+  A
 }
