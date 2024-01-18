@@ -1,39 +1,42 @@
 import { createEffect, lazy } from 'solid-js'
 import { Outlet, Route, useNavigate, Router, useLocation } from '../src'
 
-
-
 const Root = () => {
   return (
-  <div>
-    <h1>App Title</h1>
-    <Outlet/>
-  </div>
+    <div>
+      <h1>App Title</h1>
+      <Outlet />
+    </div>
   )
 }
 
 function App() {
   return (
-   <Router root={Root}>
-      <Route path='/' component={HomePage}  />
-      <Route path='/terms' component={Terms}/>
+    <Router root={Root}>
+      <Route path="/" component={HomePage} />
+      <Route path="/terms" component={Terms} />
 
-      <Route path='/app' component={AppPage} components={{drawer: AppDrawer, main: MainPage}}>
-
-      </Route>
-   </Router>
+      <Route
+        path="/app"
+        component={AppPage}
+        components={{ drawer: AppDrawer, main: MainPage }}
+      ></Route>
+    </Router>
   )
 }
 
 const AppPage = () => {
   return (
     <div>
-      <div class="drawer"><Outlet name='drawer'/></div>
-      <div class="drawer"><Outlet name='main'/></div>
+      <div class="drawer">
+        <Outlet name="drawer" />
+      </div>
+      <div class="drawer">
+        <Outlet name="main" />
+      </div>
     </div>
   )
 }
-
 
 const HomePage = () => {
   return (
@@ -43,8 +46,6 @@ const HomePage = () => {
   )
 }
 
-
-
 const Terms = () => {
   return (
     <div>
@@ -53,7 +54,5 @@ const Terms = () => {
     </div>
   )
 }
-
-
 
 export default App
