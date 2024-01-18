@@ -1,9 +1,13 @@
-import { createEffect, lazy } from 'solid-js'
-import { Outlet, Route, useNavigate, Router, useLocation } from '../src'
+import { A, Outlet, Route, Router } from '../src'
 
 const Root = () => {
+  const styles = {
+    display: "flex",
+    "flex-direction": "column",
+    height: "100%"
+  }
   return (
-    <div>
+    <div style={styles}>
       <h1>App Title</h1>
       <Outlet />
     </div>
@@ -26,15 +30,37 @@ function App() {
 }
 
 const AppPage = () => {
+  const pageStyles = {
+    display: "flex",
+    height: "100%"
+  }
+
+  const paneStyles = {
+    background: "rgba(255,255,255,0.1)",
+    "border-radius": "8px",
+    margin: "8px",
+  }
+
   return (
-    <div>
-      <div class="drawer">
+    <div style={pageStyles}>
+      <div style={{...paneStyles, width: "200px"}}>
         <Outlet name="drawer" />
       </div>
-      <div class="drawer">
+      <div style={{...paneStyles, flex: 1}}>
         <Outlet name="main" />
       </div>
     </div>
+  )
+}
+
+const AppDrawer = () => {
+  return (
+    <div>App Drawer</div>
+  )
+}
+const MainPage = () => {
+  return (
+    <div>Main Page</div>
   )
 }
 
@@ -42,6 +68,7 @@ const HomePage = () => {
   return (
     <div>
       <h1>Home Page</h1>
+      <A href="/app" >Go to app</A>
     </div>
   )
 }
