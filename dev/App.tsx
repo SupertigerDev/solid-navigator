@@ -3,9 +3,9 @@ import { A, Outlet, Route, Router } from '../src'
 
 const Root = () => {
   const styles: JSX.CSSProperties = {
-    display: "flex",
-    "flex-direction": "column",
-    height: "100%"
+    display: 'flex',
+    'flex-direction': 'column',
+    height: '100%',
   }
   return (
     <div style={styles}>
