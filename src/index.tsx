@@ -1,26 +1,32 @@
-import { Accessor, Component, createComputed, createSignal } from 'solid-js'
+import {
+  NavigateOptions,
+  useNavigate
+} from './navigator'
 
-export function createHello(): [Accessor<string>, (to: string) => void] {
-  const [hello, setHello] = createSignal('Hello World!')
+import {
+  Outlet
+} from './Outlet'
 
-  return [hello, (to: string) => setHello(`Hello ${to}!`)]
-}
+import {
+  Route,
+  RouteObject,
+} from './Route'
 
-export const Hello: Component<{ to?: string }> = props => {
-  const [hello, setHello] = createHello()
+import {
+  Router,
+  useLocation,
+  useParams,
+  RouterProps,
+} from './Router'
 
-  // Console calls will be removed in production if `dropConsole` is enabled
-
-  // eslint-disable-next-line no-console
-  console.log('Hello World!')
-
-  createComputed(() => {
-    if (typeof props.to === 'string') setHello(props.to)
-  })
-
-  return (
-    <>
-      <div>{hello()}</div>
-    </>
-  )
+export {
+  type NavigateOptions,
+  type RouteObject,
+  type RouterProps,
+  useNavigate,
+  Outlet,
+  Route,
+  Router,
+  useLocation,
+  useParams,
 }

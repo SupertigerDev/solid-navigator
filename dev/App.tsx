@@ -1,30 +1,59 @@
-import type { Component } from 'solid-js'
-import logo from './logo.svg'
-import styles from './App.module.css'
-import { Hello } from '../src'
+import { createEffect, lazy } from 'solid-js'
+import { Outlet, Route, useNavigate, Router, useLocation } from '../src'
 
-const App: Component = () => {
+
+
+const Root = () => {
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <h1>
-          <Hello></Hello>
-        </h1>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
+  <div>
+    <h1>App Title</h1>
+    <Outlet/>
+  </div>
+  )
+}
+
+function App() {
+  return (
+   <Router root={Root}>
+      <Route path='/' component={HomePage}  />
+      <Route path='/terms' component={Terms}/>
+
+      <Route path='/app' component={AppPage} components={{drawer: AppDrawer, main: MainPage}}>
+
+      </Route>
+   </Router>
+  )
+}
+
+const AppPage = () => {
+  return (
+    <div>
+      <div class="drawer"><Outlet name='drawer'/></div>
+      <div class="drawer"><Outlet name='main'/></div>
     </div>
   )
 }
+
+
+const HomePage = () => {
+  return (
+    <div>
+      <h1>Home Page</h1>
+    </div>
+  )
+}
+
+
+
+const Terms = () => {
+  return (
+    <div>
+      <h1>Terms</h1>
+      <p>Please read these non-existent terms!</p>
+    </div>
+  )
+}
+
+
 
 export default App
