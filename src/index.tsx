@@ -8,18 +8,6 @@ import { Router, useLocation, useParams, RouterProps } from './Router'
 
 import { A } from './Link'
 
-export type {
-  NavigateOptions,
-  RouteObject,
-  RouterProps,
-}
+export type { NavigateOptions, RouteObject, RouterProps }
 
-export {
-  useNavigate,
-  Outlet,
-  Route,
-  Router,
-  useLocation,
-  useParams,
-  A
-}
+export { useNavigate, Outlet, Route, Router, useLocation, useParams, A }
