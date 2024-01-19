@@ -1,5 +1,14 @@
 import { JSX, Show, createEffect, lazy } from 'solid-js'
-import { A, Outlet, Route, Router, useLocation, useMatch, useNavigate, useSearchParams } from '../src'
+import {
+  A,
+  Outlet,
+  Route,
+  Router,
+  useLocation,
+  useMatch,
+  useNavigate,
+  useSearchParams,
+} from '../src'
 const AppPage = lazy(() => import('./AppPage'))
 
 const Root = () => {
@@ -7,7 +16,6 @@ const Root = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const match = useMatch(() => '/app/')
-  
 
   // setInterval(() => {
   //   // setSearchParams({ id: Math.random().toString() })
