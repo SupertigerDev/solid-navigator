@@ -1,10 +1,7 @@
 import { Outlet, matchComponent } from '../src'
 
 const AppPage = () => {
-
-  const component = matchComponent(() => "drawer");
-
-  
+  const component = matchComponent(() => 'drawer')
 
   console.log(component())
   const pageStyles = {

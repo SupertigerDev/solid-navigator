@@ -28,8 +28,7 @@ export const matchComponent = (name: () => string) => {
   const matched = () => context.matched()
 
   const component = createMemo(() => {
-    const components =
-      matched()?.route.components || matched()?.route.mergedComponents || {}
+    const components = matched()?.route.components || matched()?.route.mergedComponents || {}
     return components[name()]
   })
 
