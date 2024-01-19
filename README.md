@@ -22,7 +22,7 @@ pnpm add solid-navigator
 Use it:
 
 ```tsx
-import { Router, Route, Outlet, A, Navigate, useNavigate, useLocation, useParams,  useMatch } from 'solid-navigator'
+import { Router, Route, Outlet, A, Navigate, useNavigate, useLocation, useParams,  useMatch, useSearchParams } from 'solid-navigator'
 ```
 
 
@@ -63,6 +63,17 @@ const match = useMatch(() => "/chats/1234");
   path: "/chats/1234"
   params: {}
 } | null
+```
+
+### `useSearchParams`
+```js
+// path: /chats?id=1234
+const [params, setParams] = useSearchParams();
+params = {
+  id: "1234"
+} | null
+
+setParams({id: "5678", hello: "Bye"}) // path: /chats?id=5678&hello=Bye
 ```
 
 ## Components

@@ -11,7 +11,7 @@ import {
   useContext,
 } from 'solid-js'
 import { RouteObject, RouteWithMergedComponents, RouteWithoutChildren } from './Route'
-import { createStore, reconcile } from 'solid-js/store'
+import { SetStoreFunction, createStore, reconcile } from 'solid-js/store'
 import { PathMatch, createMatcher } from './utils/matcher'
 import { createLocation } from './createLocation'
 import { NavigateOptions, createNavigate } from './navigator'
@@ -30,6 +30,9 @@ export interface RouterContext {
 
   setPathname: Setter<string>
   setHashAndSearch: Setter<string>
+
+  query: Record<string, string>
+  setQuery: SetStoreFunction<Record<string, string>>
 
   matched: Accessor<
     | {
@@ -54,11 +57,12 @@ export function Router(props: RouterProps) {
   const [pathname, setPathname] = createSignal(location.pathname)
   const [hashAndSearch, setHashAndSearch] = createSignal(getHashAndSearch())
 
-  const [params, setParams] = createStore({})
+  const [params, setParams] = createStore<Record<string, string>>({})
+  const [query, setQuery] = createStore<Record<string, string>>({})
 
   const pathnameWithHashAndSearch = createMemo(() => pathname() + hashAndSearch())
 
-  const loc = createLocation(pathnameWithHashAndSearch)
+  const loc = createLocation(pathnameWithHashAndSearch, query, setQuery)
 
   const matched = createMemo(() => {
     if (!routes()) return
@@ -112,7 +116,7 @@ export function Router(props: RouterProps) {
 
   return (
     <RouterContext.Provider
-      value={{ routes, matched, navigate, params, location: loc, setHashAndSearch, setPathname }}
+      value={{ routes, matched, navigate, params, location: loc, setHashAndSearch, setPathname, setQuery, query }}
     >
       {props.root?.()}
     </RouterContext.Provider>

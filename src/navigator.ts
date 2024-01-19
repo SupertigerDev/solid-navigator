@@ -2,6 +2,7 @@ import { Accessor, Setter } from 'solid-js'
 import { useRouterContext } from './Router'
 import { getHashAndSearch, isValidPath } from './utils/utils'
 import { RouteWithoutChildren } from './Route'
+import { reconcile } from 'solid-js/store'
 
 export interface NavigateOptions {
   replace?: boolean
@@ -48,4 +49,20 @@ export const Navigate = (props: { href: string }) => {
   const navigate = useNavigate()
   navigate(props.href, { replace: true })
   return null
+}
+
+
+export const useSearchParams = () => {
+  const context = useRouterContext()
+  const navigate = useNavigate()
+
+  const updateQuery = (query: Record<string, string>) => {
+    context.setQuery(reconcile(query));
+    const url = new URL(window.location.href);
+    const newSearch = new URLSearchParams(context.query);;
+    url.search = newSearch.toString();
+    navigate(url.pathname + url.search + url.hash);    
+  }
+
+  return [context.location.query, updateQuery] as const
 }

@@ -1,8 +1,15 @@
 import { JSX, Show, createEffect } from 'solid-js'
-import { A, Outlet, Route, Router, useMatch } from '../src'
+import { A, Outlet, Route, Router, useLocation, useMatch, useSearchParams } from '../src'
 
 const Root = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
   const match = useMatch(() => '/app/')
+
+  const random = () => {
+    const str= Math.random().toString();
+    return str;
+  }
 
   const styles: JSX.CSSProperties = {
     display: 'flex',
@@ -11,11 +18,12 @@ const Root = () => {
   }
 
   createEffect(() => {
-    console.log(match())
+    console.log(location.query.id)
   })
   return (
     <div style={styles}>
-      <h1>App Title</h1>
+      Root: {Math.random()}
+      <h1 onClick={() => setSearchParams({ id: random() })}>App Title</h1>
       <Outlet />
     </div>
   )
@@ -53,6 +61,7 @@ const AppPage = () => {
     <div style={pageStyles}>
       <div style={{ ...paneStyles, width: '200px' }}>
         <Outlet name="drawer" />
+        App Page: {Math.random()}
       </div>
       <div style={{ ...paneStyles, flex: 1 }}>
         <Outlet name="main" />
@@ -62,10 +71,10 @@ const AppPage = () => {
 }
 
 const AppDrawer = () => {
-  return <div>App Drawer</div>
+  return <div>App Drawer: {Math.random()}</div>
 }
 const MainPage = () => {
-  return <div>Main Page</div>
+  return <div>Main Page: {Math.random()}</div>
 }
 
 const HomePage = () => {
