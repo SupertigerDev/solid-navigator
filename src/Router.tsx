@@ -1,6 +1,7 @@
 import {
   Accessor,
   JSX,
+  Setter,
   children,
   createContext,
   createMemo,
@@ -13,18 +14,23 @@ import { RouteObject, RouteWithMergedComponents, RouteWithoutChildren } from './
 import { createStore, reconcile } from 'solid-js/store'
 import { PathMatch, createMatcher } from './utils/matcher'
 import { createLocation } from './createLocation'
-import { NavigateOptions } from './navigator'
+import { NavigateOptions, createNavigate } from './navigator'
+import { getHashAndSearch } from './utils/utils'
 
 export interface RouterProps {
   children?: JSX.Element
   root?: () => JSX.Element
 }
 
-interface RouterContext {
+export interface RouterContext {
   routes: () => RouteWithoutChildren[]
   navigate: (path: string, options?: NavigateOptions) => void
   params: Record<string, string>
   location: ReturnType<typeof createLocation>
+
+  setPathname: Setter<string>
+  setHashAndSearch: Setter<string>
+
   matched: Accessor<
     | {
         match: PathMatch
@@ -54,13 +60,6 @@ export function Router(props: RouterProps) {
 
   const loc = createLocation(pathnameWithHashAndSearch)
 
-  const isValidPath = (pathname: string) => {
-    return routes().find(route => {
-      const matcher = createMatcher(route.path)
-      return matcher(pathname)
-    })
-  }
-
   const matched = createMemo(() => {
     if (!routes()) return
     let pathMatch: PathMatch | null = null
@@ -84,30 +83,7 @@ export function Router(props: RouterProps) {
     return { match: pathMatch, route: matchedRoute }
   })
 
-  const navigate = (path: string, options?: NavigateOptions) => {
-    let newPath = path
-    let currentPathname = pathname()
-
-    if (currentPathname.endsWith('/')) {
-      currentPathname = currentPathname.slice(0, -1)
-    }
-
-    if (newPath.startsWith('./')) {
-      newPath = currentPathname + '/' + newPath.slice(2)
-    }
-    if (options?.replace) {
-      history.replaceState({}, '', newPath)
-    } else {
-      history.pushState({}, '', newPath)
-    }
-
-    if (!isValidPath(location.pathname)) {
-      console.error('Invalid path: ' + path)
-      return
-    }
-    setPathname(location.pathname)
-    setHashAndSearch(getHashAndSearch())
-  }
+  const navigate = createNavigate(routes, pathname, setPathname, setHashAndSearch)
 
   const onPopState = (_event: PopStateEvent) => {
     setPathname(location.pathname)
@@ -135,7 +111,7 @@ export function Router(props: RouterProps) {
   })
 
   return (
-    <RouterContext.Provider value={{ routes, matched, navigate, params, location: loc }}>
+    <RouterContext.Provider value={{ routes, matched, navigate, params, location: loc, setHashAndSearch, setPathname }}>
       {props.root?.()}
     </RouterContext.Provider>
   )
@@ -213,4 +189,3 @@ const flattenedRoute = (route: RouteWithMergedComponents | RouteObject) => {
   return routes
 }
 
-const getHashAndSearch = () => location.hash + location.search
