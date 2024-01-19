@@ -95,8 +95,12 @@ export function Router(props: RouterProps) {
   }
 
   const onClick = (event: MouseEvent) => {
-    const target = event.target as HTMLElement
-    if (target.tagName !== 'A') return
+    const target = event
+      .composedPath()
+      .find(el => el instanceof Node && el.nodeName.toUpperCase() === "A") as
+      | HTMLAnchorElement | undefined;
+
+    if (target?.tagName !== 'A') return
     if (!target.hasAttribute('sn-link')) return
     event.preventDefault()
     const href = target.getAttribute('href') || ''
