@@ -104,7 +104,7 @@ export function Router(props: RouterProps) {
       event.ctrlKey ||
       event.shiftKey
     )
-      return;
+      return
     const target = event
       .composedPath()
       .find(el => el instanceof Node && el.nodeName.toUpperCase() === 'A') as
