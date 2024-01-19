@@ -1,8 +1,7 @@
-import { Outlet } from "../src";
+import { Outlet } from '../src'
 
 const AppPage = () => {
-
-  console.log("mounted")
+  console.log('mounted')
   const pageStyles = {
     display: 'flex',
     height: '100%',
@@ -27,4 +26,4 @@ const AppPage = () => {
   )
 }
 
-export default AppPage;
+export default AppPage

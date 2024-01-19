@@ -30,10 +30,10 @@ export const Outlet = (props: { children?: string; name?: string }) => {
     }
     return component
   })
-  
+
   const MemodComponent = createMemo(() => {
     return component()()
-  }) 
+  })
 
   return <>{MemodComponent}</>
 }
