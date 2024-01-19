@@ -32,8 +32,7 @@ export const createNavigate = (
     }
 
     if (!isValidPath(routes, location.pathname)) {
-      console.error('Invalid path: ' + path)
-      return
+      console.warn('Invalid path: ' + path)
     }
     setPathname(location.pathname)
     setHashAndSearch(getHashAndSearch())

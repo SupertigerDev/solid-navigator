@@ -16,7 +16,7 @@ import { SetStoreFunction, createStore, reconcile } from 'solid-js/store'
 import { PathMatch, createMatcher } from './utils/matcher'
 import { createLocation } from './createLocation'
 import { NavigateOptions, createNavigate } from './navigator'
-import { getHashAndSearch } from './utils/utils'
+import { expandOptionals, getHashAndSearch } from './utils/utils'
 
 export interface RouterProps {
   children?: JSX.Element
@@ -47,13 +47,14 @@ export interface RouterContext {
 export const RouterContext = createContext<RouterContext>()
 
 export function Router(props: RouterProps) {
-  const childRoutes = children(() => props.children).toArray as unknown as () => RouteObject[]
-
-  const routes = createMemo(() => flattenedRoutes(childRoutes()))
-
   if (!props.children) {
     throw new Error('Router: No children provided.')
   }
+
+  const childRoutes = children(() => props.children).toArray as unknown as () => RouteObject[]
+  
+  const routes = createMemo(() => expandOptionalRoutes(flattenedRoutes(childRoutes())))
+
 
   const [pathname, setPathname] = createSignal(location.pathname)
   const [hashAndSearch, setHashAndSearch] = createSignal(getHashAndSearch())
@@ -216,6 +217,15 @@ const flattenedRoute = (route: RouteWithMergedComponents | RouteObject) => {
       }),
     )
   }
-
   return routes
+}
+
+const expandOptionalRoutes = (routes: RouteWithMergedComponents[]) => {
+  const newRoutes: RouteWithMergedComponents[] = [];
+  routes.forEach(route => {
+    expandOptionals(route.path).forEach(path => {
+      newRoutes.push({...route, path})
+    })
+  })
+  return newRoutes
 }

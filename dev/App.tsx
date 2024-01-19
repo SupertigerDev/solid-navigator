@@ -7,6 +7,7 @@ import {
   useLocation,
   useMatch,
   useNavigate,
+  useParams,
   useSearchParams,
 } from '../src'
 const AppPage = lazy(() => import('./AppPage'))
@@ -15,12 +16,15 @@ const Root = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()
   const navigate = useNavigate()
-  const match = useMatch(() => '/app/')
+  const match = useMatch(() => '/app/:id ')
+  const params = useParams();
 
-  // setInterval(() => {
-  //   // setSearchParams({ id: Math.random().toString() })
-  //   // navigate('/app/' + Math.random())
-  // }, 1000)
+  
+createEffect(() => {
+  console.log(match())
+  console.log(params.id)
+})
+
 
   const random = () => {
     const str = Math.random().toString()
@@ -52,7 +56,7 @@ function App() {
       <Route path="/terms" component={Terms} />
       <Show when={true}>
         <Route
-          path="/app/:id"
+          path="/app/:id?"
           component={AppPage}
           components={{ drawer: AppDrawer, main: MainPage }}
         ></Route>
