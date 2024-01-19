@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js'
+import { JSX, Show } from 'solid-js'
 import { A, Outlet, Route, Router } from '../src'
 
 const Root = () => {
@@ -20,12 +20,13 @@ function App() {
     <Router root={Root}>
       <Route path="/" component={HomePage} />
       <Route path="/terms" component={Terms} />
-
+      <Show when={true}>
       <Route
         path="/app"
         component={AppPage}
         components={{ drawer: AppDrawer, main: MainPage }}
       ></Route>
+      </Show>
     </Router>
   )
 }

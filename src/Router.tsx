@@ -22,7 +22,7 @@ export interface RouterProps {
 
 interface RouterContext {
   routes: () => RouteWithoutChildren[]
-  navigate: (path: string) => void
+  navigate: (path: string, options?: NavigateOptions) => void
   params: Record<string, string>
   location: ReturnType<typeof createLocation>
   matched: Accessor<
@@ -120,7 +120,9 @@ export function Router(props: RouterProps) {
     if (!target.hasAttribute('sn-link')) return
     event.preventDefault()
     const href = target.getAttribute('href') || ''
-    navigate(href)
+    navigate(href, {
+      replace: target.hasAttribute("replace")
+    })
   }
 
   onMount(() => {
@@ -147,9 +149,9 @@ export const useRouterContext = () => {
   return context
 }
 
-export const useParams = () => {
+export function useParams<T = Record<string, string>>() {
   const context = useRouterContext()
-  return context.params
+  return context.params as T;
 }
 
 export const useLocation = () => useRouterContext().location

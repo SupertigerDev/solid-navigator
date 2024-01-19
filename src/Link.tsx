@@ -1,5 +1,9 @@
 import { JSX } from 'solid-js'
 
-export const A = (props: JSX.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+type LinkProps = {
+  replace?: boolean
+} &  JSX.AnchorHTMLAttributes<HTMLAnchorElement>
+
+export const A = (props: LinkProps) => {
   return <a sn-link {...props} />
 }
