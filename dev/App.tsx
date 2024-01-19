@@ -17,14 +17,12 @@ const Root = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const match = useMatch(() => '/app/:id ')
-  const params = useParams();
+  const params = useParams()
 
-  
-createEffect(() => {
-  console.log(match())
-  console.log(params.id)
-})
-
+  createEffect(() => {
+    console.log(match())
+    console.log(params.id)
+  })
 
   const random = () => {
     const str = Math.random().toString()

@@ -52,9 +52,8 @@ export function Router(props: RouterProps) {
   }
 
   const childRoutes = children(() => props.children).toArray as unknown as () => RouteObject[]
-  
-  const routes = createMemo(() => expandOptionalRoutes(flattenedRoutes(childRoutes())))
 
+  const routes = createMemo(() => expandOptionalRoutes(flattenedRoutes(childRoutes())))
 
   const [pathname, setPathname] = createSignal(location.pathname)
   const [hashAndSearch, setHashAndSearch] = createSignal(getHashAndSearch())
@@ -221,10 +220,10 @@ const flattenedRoute = (route: RouteWithMergedComponents | RouteObject) => {
 }
 
 const expandOptionalRoutes = (routes: RouteWithMergedComponents[]) => {
-  const newRoutes: RouteWithMergedComponents[] = [];
+  const newRoutes: RouteWithMergedComponents[] = []
   routes.forEach(route => {
     expandOptionals(route.path).forEach(path => {
-      newRoutes.push({...route, path})
+      newRoutes.push({ ...route, path })
     })
   })
   return newRoutes

@@ -12,17 +12,17 @@ export const A = (props: LinkProps) => {
 }
 
 export const useMatch = (path: () => string) => {
-  const location = useLocation();
-  
+  const location = useLocation()
+
   const matchers = createMemo(() => {
     return expandOptionals(path()).map(path => createMatcher(path))
   })
   return createMemo(() => {
     for (let i = 0; i < matchers().length; i++) {
-      const matcher = matchers()[i];
-      const match = matcher(location.pathname);
+      const matcher = matchers()[i]
+      const match = matcher(location.pathname)
       if (match) {
-        return match;
+        return match
       }
     }
   })
