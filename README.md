@@ -22,7 +22,7 @@ pnpm add solid-navigator
 Use it:
 
 ```tsx
-import { useNavigate, Outlet, Route, Router, useLocation, useParams, A } from 'solid-navigator'
+import { useNavigate, Outlet, Route, Router, useLocation, useParams, A, useMatch } from 'solid-navigator'
 ```
 
 
