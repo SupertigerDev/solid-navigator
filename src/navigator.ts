@@ -43,3 +43,10 @@ export const useNavigate = () => {
   const context = useRouterContext()
   return context.navigate
 }
+
+
+export const Navigate = (props: {href: string}) => {
+  const navigate = useNavigate()
+  navigate(props.href, { replace: true })
+  return null;
+}

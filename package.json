@@ -1,17 +1,17 @@
 {
-  "name": "{{name_of_lib}}",
+  "name": "solid-navigator",
   "version": "0.0.0",
-  "description": "{{desc_of_lib}}",
+  "description": "Solid Navigator is a library that is inspired by vue router and solid router.",
   "license": "MIT",
-  "author": "{{me}}",
+  "author": "SupertigerDev",
   "contributors": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/{{me}}/{{name_of_lib}}.git"
+    "url": "git+https://github.com/SupertigerDev/solid-navigator.git"
   },
-  "homepage": "https://github.com/{{me}}/{{name_of_lib}}#readme",
+  "homepage": "https://github.com/SupertigerDev/solid-navigator#readme",
   "bugs": {
-    "url": "https://github.com/{{me}}/{{name_of_lib}}/issues"
+    "url": "https://github.com/SupertigerDev/solid-navigator/issues"
   },
   "files": [
     "dist"

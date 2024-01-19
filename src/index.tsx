@@ -1,4 +1,4 @@
-import { NavigateOptions, useNavigate } from './navigator'
+import { NavigateOptions, useNavigate, Navigate } from './navigator'
 
 import { Outlet } from './Outlet'
 
@@ -10,4 +10,4 @@ import { A } from './Link'
 
 export type { NavigateOptions, RouteObject, RouterProps }
 
-export { useNavigate, Outlet, Route, Router, useLocation, useParams, A }
+export { useNavigate, Outlet, Route, Router, useLocation, useParams, A, Navigate }
