@@ -111,7 +111,9 @@ export function Router(props: RouterProps) {
   })
 
   return (
-    <RouterContext.Provider value={{ routes, matched, navigate, params, location: loc, setHashAndSearch, setPathname }}>
+    <RouterContext.Provider
+      value={{ routes, matched, navigate, params, location: loc, setHashAndSearch, setPathname }}
+    >
       {props.root?.()}
     </RouterContext.Provider>
   )
@@ -188,4 +190,3 @@ const flattenedRoute = (route: RouteWithMergedComponents | RouteObject) => {
 
   return routes
 }
-
