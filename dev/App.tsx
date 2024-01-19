@@ -16,7 +16,7 @@ const Root = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()
   const navigate = useNavigate()
-  const match = useMatch(() => '/app/:id ')
+  const match = useMatch(() => '/app/:id?')
   const params = useParams()
 
   createEffect(() => {

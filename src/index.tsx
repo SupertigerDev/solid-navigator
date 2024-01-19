@@ -2,7 +2,7 @@ import { NavigateOptions, useNavigate, Navigate, useSearchParams } from './navig
 
 import { Outlet } from './Outlet'
 
-import { Route, RouteObject } from './Route'
+import { Route, RouteObject, matchComponent } from './Route'
 
 import { Router, useLocation, useParams, RouterProps } from './Router'
 
@@ -21,4 +21,5 @@ export {
   Navigate,
   useMatch,
   useSearchParams,
+  matchComponent
 }

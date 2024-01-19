@@ -1,4 +1,5 @@
-import { JSX, children, mergeProps } from 'solid-js'
+import { Component, JSX, children, createMemo, mergeProps } from 'solid-js'
+import { useRouterContext } from './Router'
 
 export interface RouteObject {
   path: string
@@ -20,4 +21,19 @@ export const Route = (props: Omit<RouteObject, 'children'> & { children?: JSX.El
       return childRoutes()
     },
   }) as unknown as JSX.Element
+}
+
+
+export const matchComponent = (name: () => string) => {
+  const context = useRouterContext()
+  const matched = () => context.matched()
+
+  const component = createMemo(() => {
+    const components = context.matched()?.route.components || context.matched()?.route.mergedComponents || {}
+    return components[name()]
+  })
+
+  return createMemo(() => {
+    return component()()
+  }) as Component
 }
