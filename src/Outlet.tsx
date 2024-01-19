@@ -1,4 +1,4 @@
-import { createMemo } from 'solid-js'
+import { Suspense, createMemo } from 'solid-js'
 import { useRouterContext } from './Router'
 
 const Fragment = () => <></>
@@ -30,6 +30,10 @@ export const Outlet = (props: { children?: string; name?: string }) => {
     }
     return component
   })
+  
+  const MemodComponent = createMemo(() => {
+    return component()()
+  }) 
 
-  return <>{component}</>
+  return <>{MemodComponent}</>
 }

@@ -1,10 +1,18 @@
-import { JSX, Show, createEffect } from 'solid-js'
-import { A, Outlet, Route, Router, useLocation, useMatch, useSearchParams } from '../src'
+import { JSX, Show, createEffect, lazy } from 'solid-js'
+import { A, Outlet, Route, Router, useLocation, useMatch, useNavigate, useSearchParams } from '../src'
+const AppPage = lazy(() => import('./AppPage'))
 
 const Root = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()
+  const navigate = useNavigate()
   const match = useMatch(() => '/app/')
+  
+
+  // setInterval(() => {
+  //   // setSearchParams({ id: Math.random().toString() })
+  //   // navigate('/app/' + Math.random())
+  // }, 1000)
 
   const random = () => {
     const str = Math.random().toString()
@@ -18,7 +26,7 @@ const Root = () => {
   }
 
   createEffect(() => {
-    console.log(location.query.id)
+    console.log(location.query)
   })
   return (
     <div style={styles}>
@@ -36,37 +44,12 @@ function App() {
       <Route path="/terms" component={Terms} />
       <Show when={true}>
         <Route
-          path="/app/*"
+          path="/app/:id"
           component={AppPage}
           components={{ drawer: AppDrawer, main: MainPage }}
         ></Route>
       </Show>
     </Router>
-  )
-}
-
-const AppPage = () => {
-  const pageStyles = {
-    display: 'flex',
-    height: '100%',
-  }
-
-  const paneStyles = {
-    background: 'rgba(255,255,255,0.1)',
-    'border-radius': '8px',
-    margin: '8px',
-  }
-
-  return (
-    <div style={pageStyles}>
-      <div style={{ ...paneStyles, width: '200px' }}>
-        <Outlet name="drawer" />
-        App Page: {Math.random()}
-      </div>
-      <div style={{ ...paneStyles, flex: 1 }}>
-        <Outlet name="main" />
-      </div>
-    </div>
   )
 }
 
