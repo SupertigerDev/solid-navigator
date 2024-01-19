@@ -21,11 +21,11 @@ function App() {
       <Route path="/" component={HomePage} />
       <Route path="/terms" component={Terms} />
       <Show when={true}>
-      <Route
-        path="/app"
-        component={AppPage}
-        components={{ drawer: AppDrawer, main: MainPage }}
-      ></Route>
+        <Route
+          path="/app"
+          component={AppPage}
+          components={{ drawer: AppDrawer, main: MainPage }}
+        ></Route>
       </Show>
     </Router>
   )

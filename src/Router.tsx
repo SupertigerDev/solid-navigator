@@ -121,7 +121,7 @@ export function Router(props: RouterProps) {
     event.preventDefault()
     const href = target.getAttribute('href') || ''
     navigate(href, {
-      replace: target.hasAttribute("replace")
+      replace: target.hasAttribute('replace'),
     })
   }
 
@@ -151,7 +151,7 @@ export const useRouterContext = () => {
 
 export function useParams<T = Record<string, string>>() {
   const context = useRouterContext()
-  return context.params as T;
+  return context.params as T
 }
 
 export const useLocation = () => useRouterContext().location
