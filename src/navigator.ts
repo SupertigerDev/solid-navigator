@@ -64,4 +64,3 @@ export const useSearchParams = () => {
 
   return [context.location.query, updateQuery] as const
 }
-

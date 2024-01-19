@@ -23,13 +23,13 @@ export const Route = (props: Omit<RouteObject, 'children'> & { children?: JSX.El
   }) as unknown as JSX.Element
 }
 
-
 export const matchComponent = (name: () => string) => {
   const context = useRouterContext()
   const matched = () => context.matched()
 
   const component = createMemo(() => {
-    const components = context.matched()?.route.components || context.matched()?.route.mergedComponents || {}
+    const components =
+      context.matched()?.route.components || context.matched()?.route.mergedComponents || {}
     return components[name()]
   })
 

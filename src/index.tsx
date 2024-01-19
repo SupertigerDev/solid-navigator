@@ -21,5 +21,5 @@ export {
   Navigate,
   useMatch,
   useSearchParams,
-  matchComponent
+  matchComponent,
 }
