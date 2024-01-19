@@ -1,6 +1,6 @@
 {
   "name": "solid-navigator",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Solid Navigator is a library that is inspired by vue router and solid router.",
   "license": "MIT",
   "author": "SupertigerDev",

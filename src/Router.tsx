@@ -10,6 +10,7 @@ import {
   onMount,
   useContext,
 } from 'solid-js'
+import {delegateEvents} from 'solid-js/web';
 import { RouteObject, RouteWithMergedComponents, RouteWithoutChildren } from './Route'
 import { SetStoreFunction, createStore, reconcile } from 'solid-js/store'
 import { PathMatch, createMatcher } from './utils/matcher'
@@ -110,14 +111,16 @@ export function Router(props: RouterProps) {
     })
   }
 
-  onMount(() => {
-    window.addEventListener('popstate', onPopState)
-    document.addEventListener('click', onClick)
-    onCleanup(() => {
-      window.removeEventListener('popstate', onPopState)
-      document.removeEventListener('click', onClick)
-    })
+
+  delegateEvents(['click'])
+  window.addEventListener('popstate', onPopState)
+  document.addEventListener('click', onClick)
+
+  onCleanup(() => {
+    window.removeEventListener('popstate', onPopState)
+    document.removeEventListener('click', onClick)
   })
+  
 
   return (
     <RouterContext.Provider
