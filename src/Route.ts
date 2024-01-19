@@ -4,7 +4,7 @@ export interface RouteObject {
   path: string
   children?: RouteObject[]
   component?: () => JSX.Element
-  components?: Record<string, () => JSX.Element>
+  components?: Record<string, () => JSX.Element | undefined>
 }
 
 export type RouteWithMergedComponents = RouteObject & {
