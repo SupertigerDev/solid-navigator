@@ -1,4 +1,4 @@
-// Most of the code is borrowed from @solidjs/router
+// Code is borrowed from @solidjs/router
 
 export type MatchFilter = readonly string[] | RegExp | ((s: string) => boolean)
 
