@@ -6,7 +6,7 @@
 
 [![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg?style=for-the-badge&logo=pnpm)](https://pnpm.io/)
 
-Solid Navigator is a library that is inspired by vue router and solid router.
+Solid Navigator is a library that is inspired by vue-router and @solidjs/router.
 
 
 ## Quick start
