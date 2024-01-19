@@ -1,12 +1,18 @@
-import { JSX, Show } from 'solid-js'
-import { A, Outlet, Route, Router } from '../src'
+import { JSX, Show, createEffect } from 'solid-js'
+import { A, Outlet, Route, Router, useMatch } from '../src'
 
 const Root = () => {
+  const match = useMatch(() => '/app/')
+
   const styles: JSX.CSSProperties = {
     display: 'flex',
     'flex-direction': 'column',
     height: '100%',
   }
+
+  createEffect(() => {
+    console.log(match())
+  })
   return (
     <div style={styles}>
       <h1>App Title</h1>
@@ -22,7 +28,7 @@ function App() {
       <Route path="/terms" component={Terms} />
       <Show when={true}>
         <Route
-          path="/app"
+          path="/app/*"
           component={AppPage}
           components={{ drawer: AppDrawer, main: MainPage }}
         ></Route>
@@ -42,6 +48,7 @@ const AppPage = () => {
     'border-radius': '8px',
     margin: '8px',
   }
+
 
   return (
     <div style={pageStyles}>

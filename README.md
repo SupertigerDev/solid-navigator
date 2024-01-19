@@ -55,6 +55,16 @@ const params = useParams<{id: string}>();
 }
 ```
 
+### `useMatch`
+```js
+// path: /chats/1234
+const match = useMatch(() => "/chats/1234");
+{
+  path: "/chats/1234"
+  params: {}
+} | null
+```
+
 ## Components
 
 ### `Router`  
