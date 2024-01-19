@@ -96,6 +96,15 @@ export function Router(props: RouterProps) {
   }
 
   const onClick = (event: MouseEvent) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.shiftKey
+    )
+      return;
     const target = event
       .composedPath()
       .find(el => el instanceof Node && el.nodeName.toUpperCase() === 'A') as
