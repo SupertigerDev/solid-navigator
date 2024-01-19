@@ -1,8 +1,11 @@
 import { Accessor, Setter, createEffect, createMemo, on } from 'solid-js'
 import { SetStoreFunction, createStore, reconcile } from 'solid-js/store'
 
-export const createLocation = (path: Accessor<string>, query: Record<string, string>, setQuery: SetStoreFunction<Record<string, string>>) => {
-
+export const createLocation = (
+  path: Accessor<string>,
+  query: Record<string, string>,
+  setQuery: SetStoreFunction<Record<string, string>>,
+) => {
   const url = createMemo(() => {
     return new URL(path(), 'http://owo')
   })

@@ -116,7 +116,17 @@ export function Router(props: RouterProps) {
 
   return (
     <RouterContext.Provider
-      value={{ routes, matched, navigate, params, location: loc, setHashAndSearch, setPathname, setQuery, query }}
+      value={{
+        routes,
+        matched,
+        navigate,
+        params,
+        location: loc,
+        setHashAndSearch,
+        setPathname,
+        setQuery,
+        query,
+      }}
     >
       {props.root?.()}
     </RouterContext.Provider>

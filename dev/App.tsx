@@ -2,13 +2,13 @@ import { JSX, Show, createEffect } from 'solid-js'
 import { A, Outlet, Route, Router, useLocation, useMatch, useSearchParams } from '../src'
 
 const Root = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams()
+  const location = useLocation()
   const match = useMatch(() => '/app/')
 
   const random = () => {
-    const str= Math.random().toString();
-    return str;
+    const str = Math.random().toString()
+    return str
   }
 
   const styles: JSX.CSSProperties = {

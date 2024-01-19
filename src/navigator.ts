@@ -51,17 +51,16 @@ export const Navigate = (props: { href: string }) => {
   return null
 }
 
-
 export const useSearchParams = () => {
   const context = useRouterContext()
   const navigate = useNavigate()
 
   const updateQuery = (query: Record<string, string>) => {
-    context.setQuery(reconcile(query));
-    const url = new URL(window.location.href);
-    const newSearch = new URLSearchParams(context.query);;
-    url.search = newSearch.toString();
-    navigate(url.pathname + url.search + url.hash);    
+    context.setQuery(reconcile(query))
+    const url = new URL(window.location.href)
+    const newSearch = new URLSearchParams(context.query)
+    url.search = newSearch.toString()
+    navigate(url.pathname + url.search + url.hash)
   }
 
   return [context.location.query, updateQuery] as const

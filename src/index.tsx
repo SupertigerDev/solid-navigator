@@ -10,4 +10,15 @@ import { A, useMatch } from './Link'
 
 export type { NavigateOptions, RouteObject, RouterProps }
 
-export { useNavigate, Outlet, Route, Router, useLocation, useParams, A, Navigate, useMatch, useSearchParams }
+export {
+  useNavigate,
+  Outlet,
+  Route,
+  Router,
+  useLocation,
+  useParams,
+  A,
+  Navigate,
+  useMatch,
+  useSearchParams,
+}
