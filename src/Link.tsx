@@ -10,7 +10,6 @@ export const A = (props: LinkProps) => {
   return <a sn-link {...props} />
 }
 
-
 export const useMatch = (path: () => string) => {
   const context = useRouterContext()
   const matcher = createMemo(() => createMatcher(path()))

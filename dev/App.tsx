@@ -49,7 +49,6 @@ const AppPage = () => {
     margin: '8px',
   }
 
-
   return (
     <div style={pageStyles}>
       <div style={{ ...paneStyles, width: '200px' }}>
