@@ -1,7 +1,12 @@
-import { Outlet } from '../src'
+import { Outlet, matchComponent } from '../src'
 
 const AppPage = () => {
-  console.log('mounted')
+
+  const component = matchComponent(() => "drawer");
+
+  
+
+  console.log(component())
   const pageStyles = {
     display: 'flex',
     height: '100%',

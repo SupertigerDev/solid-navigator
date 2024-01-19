@@ -29,11 +29,11 @@ export const matchComponent = (name: () => string) => {
 
   const component = createMemo(() => {
     const components =
-      context.matched()?.route.components || context.matched()?.route.mergedComponents || {}
+      matched()?.route.components || matched()?.route.mergedComponents || {}
     return components[name()]
   })
 
   return createMemo(() => {
-    return component()()
-  }) as Component
+    return component()
+  }) as () => Component
 }
