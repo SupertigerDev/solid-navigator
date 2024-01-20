@@ -50,7 +50,7 @@ export const Navigate = (props: { href: string }) => {
   return null
 }
 
-export const useSearchParams = () => {
+export function useSearchParams<T = Record<string, string>>() {
   const context = useRouterContext()
   const navigate = useNavigate()
 
@@ -62,5 +62,5 @@ export const useSearchParams = () => {
     navigate(url.pathname + url.search + url.hash)
   }
 
-  return [context.location.query, updateQuery] as const
+  return [context.location.query as T, updateQuery as (query: T) => void] as const
 }

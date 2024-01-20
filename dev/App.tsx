@@ -13,7 +13,7 @@ import {
 const AppPage = lazy(() => import('./AppPage'))
 
 const Root = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams<{id: string}>()
   const location = useLocation()
   const navigate = useNavigate()
   const match = useMatch(() => '/app/:id?')
