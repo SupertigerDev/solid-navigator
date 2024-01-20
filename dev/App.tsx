@@ -56,7 +56,7 @@ function App() {
         <Route
           path="/app/:id?"
           component={AppPage}
-          components={{ drawer: AppDrawer, main: MainPage }}
+          components={{ drawer: AppDrawer, main: MainPage, test: undefined }}
         ></Route>
       </Show>
     </Router>
