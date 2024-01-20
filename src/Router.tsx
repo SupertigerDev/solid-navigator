@@ -113,8 +113,9 @@ export function Router(props: RouterProps) {
 
     if (target?.tagName !== 'A') return
     if (!target.hasAttribute('sn-link')) return
-    event.preventDefault()
     const href = target.getAttribute('href') || ''
+    if (href.startsWith("http://") || href.startsWith("https://")) return;
+    event.preventDefault()
     navigate(href, {
       replace: target.hasAttribute('replace'),
     })
