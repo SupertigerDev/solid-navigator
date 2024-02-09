@@ -57,13 +57,13 @@ export function useSearchParams<T = Record<string, string>>() {
   const context = useRouterContext()
   const navigate = useNavigate()
 
-  const updateQuery = (query: Record<string, string>) => {
+  const updateQuery = (query: Record<string, string>, options?: NavigateOptions) => {
     context.setQuery(reconcile(query))
     const url = new URL(window.location.href)
     const newSearch = new URLSearchParams(context.query)
     url.search = newSearch.toString()
-    navigate(url.pathname + url.search + url.hash)
+    navigate(url.pathname + url.search + url.hash, options)
   }
 
-  return [context.location.query as T, updateQuery as (query: T) => void] as const
+  return [context.location.query as T, updateQuery as (query: T, options?: NavigateOptions) => void] as const
 }
