@@ -1,9 +1,11 @@
-import { Outlet, matchComponent } from '../src'
+import { onMount } from 'solid-js'
+import { Outlet, matchComponent, useLocation, useSearchParams } from '../src'
 
 const AppPage = () => {
   const component = matchComponent(() => 'drawer')
+  const [params, setParams] = useSearchParams<{ id: string }>()
+  const location = useLocation()
 
-  console.log(component())
   const pageStyles = {
     display: 'flex',
     height: '100%',
@@ -14,6 +16,14 @@ const AppPage = () => {
     'border-radius': '8px',
     margin: '8px',
   }
+
+  onMount(() => {
+    console.log(location.search)
+    console.log(location.pathname)
+
+
+
+  })
 
   return (
     <div style={pageStyles}>

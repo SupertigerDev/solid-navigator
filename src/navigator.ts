@@ -1,4 +1,4 @@
-import { Accessor, Setter } from 'solid-js'
+import { Accessor, Setter, batch } from 'solid-js'
 import { useRouterContext } from './Router'
 import { getHashAndSearch, isValidPath } from './utils/utils'
 import { RouteWithoutChildren } from './Route'
@@ -34,8 +34,11 @@ export const createNavigate = (
     if (!isValidPath(routes, location.pathname)) {
       console.warn('Invalid path: ' + path)
     }
-    setPathname(location.pathname)
-    setHashAndSearch(getHashAndSearch())
+
+    batch(() => {
+      setPathname(location.pathname)
+      setHashAndSearch(getHashAndSearch())
+    })
   }
 }
 

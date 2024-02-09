@@ -19,10 +19,6 @@ const Root = () => {
   const match = useMatch(() => '/app/:id?')
   const params = useParams()
 
-  createEffect(() => {
-    console.log(match())
-    console.log(params.id)
-  })
 
   const random = () => {
     const str = Math.random().toString()
@@ -34,10 +30,6 @@ const Root = () => {
     'flex-direction': 'column',
     height: '100%',
   }
-
-  createEffect(() => {
-    console.log(location.query)
-  })
   return (
     <div style={styles}>
       Root: {Math.random()}
@@ -74,7 +66,7 @@ const HomePage = () => {
   return (
     <div>
       <h1>Home Page</h1>
-      <A href="/app">Go to app</A>
+      <A href="/app?id=1234">Go to app</A>
     </div>
   )
 }

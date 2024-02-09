@@ -2,12 +2,12 @@ import {
   Accessor,
   JSX,
   Setter,
+  batch,
   children,
   createContext,
   createMemo,
   createSignal,
   onCleanup,
-  onMount,
   useContext,
 } from 'solid-js'
 import { delegateEvents } from 'solid-js/web'
@@ -91,8 +91,10 @@ export function Router(props: RouterProps) {
   const navigate = createNavigate(routes, pathname, setPathname, setHashAndSearch)
 
   const onPopState = (_event: PopStateEvent) => {
-    setPathname(location.pathname)
-    setHashAndSearch(getHashAndSearch())
+    batch(() => {
+      setPathname(location.pathname)
+      setHashAndSearch(getHashAndSearch())
+    })
   }
 
   const onClick = (event: MouseEvent) => {
