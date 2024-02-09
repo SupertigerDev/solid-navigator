@@ -65,5 +65,8 @@ export function useSearchParams<T = Record<string, string>>() {
     navigate(url.pathname + url.search + url.hash, options)
   }
 
-  return [context.location.query as T, updateQuery as (query: T, options?: NavigateOptions) => void] as const
+  return [
+    context.location.query as T,
+    updateQuery as (query: T, options?: NavigateOptions) => void,
+  ] as const
 }
