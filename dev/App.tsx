@@ -19,7 +19,6 @@ const Root = () => {
   const match = useMatch(() => '/app/:id?')
   const params = useParams()
 
-
   const random = () => {
     const str = Math.random().toString()
     return str

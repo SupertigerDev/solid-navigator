@@ -20,9 +20,6 @@ const AppPage = () => {
   onMount(() => {
     console.log(location.search)
     console.log(location.pathname)
-
-
-
   })
 
   return (
