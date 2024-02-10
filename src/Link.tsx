@@ -8,7 +8,24 @@ type LinkProps = {
 } & JSX.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export const A = (props: LinkProps) => {
-  return <a sn-link {...props} />
+  const location = useLocation();
+
+  const resolvedHref = () => {
+    if (!props.href) return props.href;
+    let newPath = props.href;
+    let currentPathname = location.pathname;
+
+    if (currentPathname.endsWith('/')) {
+      currentPathname = currentPathname.slice(0, -1)
+    }
+
+    if (newPath.startsWith('./')) {
+      newPath = currentPathname + '/' + newPath.slice(2)
+    }
+    return newPath;
+  }
+
+  return <a sn-link {...props} href={resolvedHref()} />
 }
 
 export const useMatch = (path: () => string) => {
