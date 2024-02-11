@@ -26,7 +26,7 @@ export const A = (props: LinkProps) => {
     }
 
     if (newPath.startsWith('../')) {
-      newPath = currentPathname + '/' + newPath.slice(3)
+      newPath = currentPathname + '/' + newPath
     }
 
     return newPath

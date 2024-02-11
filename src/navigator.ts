@@ -28,7 +28,7 @@ export const createNavigate = (
     }
 
     if (newPath.startsWith('../')) {
-      newPath = currentPathname + '/' + newPath.slice(3)
+      newPath = currentPathname + '/' + newPath
     }
 
     if (options?.replace) {
