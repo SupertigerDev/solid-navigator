@@ -23,6 +23,7 @@ export const createLocation = (
   const search = createMemo(() => url().search)
   const pathname = createMemo(() => url().pathname)
   const hash = createMemo(() => url().hash)
+  const state = createMemo(on([hash, pathname, search], () => history.state))
 
   return {
     query,
@@ -35,5 +36,8 @@ export const createLocation = (
     get hash() {
       return hash()
     },
+    get state() {
+      return state()
+    }
   }
 }

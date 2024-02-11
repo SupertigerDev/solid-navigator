@@ -6,6 +6,7 @@ import { reconcile } from 'solid-js/store'
 
 export interface NavigateOptions {
   replace?: boolean
+  data?: any
 }
 
 export const createNavigate = (
@@ -26,9 +27,9 @@ export const createNavigate = (
       newPath = currentPathname + '/' + newPath.slice(2)
     }
     if (options?.replace) {
-      history.replaceState({}, '', newPath)
+      history.replaceState(options.data || null, '', newPath)
     } else {
-      history.pushState({}, '', newPath)
+      history.pushState(options?.data || null, '', newPath)
     }
 
     if (!isValidPath(routes, location.pathname)) {
