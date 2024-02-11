@@ -1,5 +1,5 @@
-import { JSX, createMemo } from 'solid-js'
-import { useLocation, useRouterContext } from './Router'
+import { JSX, createMemo, splitProps } from 'solid-js'
+import { useLocation } from './Router'
 import { createMatcher } from './utils/matcher'
 import { expandOptionals } from './utils/utils'
 
@@ -9,6 +9,7 @@ type LinkProps = {
 } & JSX.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export const A = (props: LinkProps) => {
+  const [, rest] = splitProps(props, ['href', 'state'])
   const location = useLocation()
 
   const resolvedHref = () => {
@@ -26,7 +27,12 @@ export const A = (props: LinkProps) => {
     return newPath
   }
 
-  return <a sn-link {...props} d-state={JSON.stringify(props.state)} href={resolvedHref()} />
+  return <a
+    {...rest} 
+    href={resolvedHref()} 
+    sn-link 
+    d-state={JSON.stringify(props.state)} 
+  />
 }
 
 export const useMatch = (path: () => string) => {
