@@ -120,7 +120,7 @@ export function Router(props: RouterProps) {
     event.preventDefault()
     navigate(href, {
       replace: target.hasAttribute('replace'),
-      state: JSON.parse(target.getAttribute('state') || 'null'),
+      state: JSON.parse(target.getAttribute('d-state') || 'null'),
     })
   }
 

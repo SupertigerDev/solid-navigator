@@ -26,7 +26,7 @@ export const A = (props: LinkProps) => {
     return newPath
   }
 
-  return <a sn-link state={JSON.stringify(props.state)} {...props} href={resolvedHref()} />
+  return <a sn-link {...props} d-state={JSON.stringify(props.state)} href={resolvedHref()} />
 }
 
 export const useMatch = (path: () => string) => {
