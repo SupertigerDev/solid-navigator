@@ -26,6 +26,11 @@ export const createNavigate = (
     if (newPath.startsWith('./')) {
       newPath = currentPathname + '/' + newPath.slice(2)
     }
+
+    if (newPath.startsWith('../')) {
+      newPath = currentPathname + '/' + newPath.slice(3)
+    }
+
     if (options?.replace) {
       history.replaceState(options.state || null, '', newPath)
     } else {
