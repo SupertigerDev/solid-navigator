@@ -38,6 +38,6 @@ export const createLocation = (
     },
     get state() {
       return state()
-    }
+    },
   }
 }
