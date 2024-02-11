@@ -5,6 +5,7 @@ import { expandOptionals } from './utils/utils'
 
 type LinkProps = {
   replace?: boolean
+  state?: any
 } & JSX.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export const A = (props: LinkProps) => {
@@ -25,7 +26,7 @@ export const A = (props: LinkProps) => {
     return newPath
   }
 
-  return <a sn-link {...props} href={resolvedHref()} />
+  return <a sn-link state={JSON.stringify(props.state)} {...props} href={resolvedHref()} />
 }
 
 export const useMatch = (path: () => string) => {
