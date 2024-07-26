@@ -16,7 +16,7 @@ import { SetStoreFunction, createStore, reconcile } from 'solid-js/store'
 import { PathMatch, createMatcher } from './utils/matcher'
 import { createLocation } from './createLocation'
 import { NavigateOptions, createNavigate } from './navigator'
-import { expandOptionals, getHashAndSearch } from './utils/utils'
+import { expandOptionals, getSearchAndHash } from './utils/utils'
 
 export interface RouterProps {
   children?: JSX.Element
@@ -30,7 +30,7 @@ export interface RouterContext {
   location: ReturnType<typeof createLocation>
 
   setPathname: Setter<string>
-  setHashAndSearch: Setter<string>
+  setSearchAndHash: Setter<string>
 
   query: Record<string, string>
   setQuery: SetStoreFunction<Record<string, string>>
@@ -56,14 +56,14 @@ export function Router(props: RouterProps) {
   const routes = createMemo(() => expandOptionalRoutes(flattenedRoutes(childRoutes())))
 
   const [pathname, setPathname] = createSignal(location.pathname)
-  const [hashAndSearch, setHashAndSearch] = createSignal(getHashAndSearch())
+  const [searchAndHash, setSearchAndHash] = createSignal(getSearchAndHash())
 
   const [params, setParams] = createStore<Record<string, string>>({})
   const [query, setQuery] = createStore<Record<string, string>>({})
 
-  const pathnameWithHashAndSearch = createMemo(() => pathname() + hashAndSearch())
+  const pathnameWithSearchAndHash = createMemo(() => pathname() + searchAndHash())
 
-  const loc = createLocation(pathnameWithHashAndSearch, query, setQuery)
+  const loc = createLocation(pathnameWithSearchAndHash, query, setQuery)
 
   const matched = createMemo(() => {
     if (!routes()) return
@@ -88,12 +88,12 @@ export function Router(props: RouterProps) {
     return { match: pathMatch, route: matchedRoute }
   })
 
-  const navigate = createNavigate(routes, pathname, setPathname, setHashAndSearch)
+  const navigate = createNavigate(routes, pathname, setPathname, setSearchAndHash)
 
   const onPopState = (_event: PopStateEvent) => {
     batch(() => {
       setPathname(location.pathname)
-      setHashAndSearch(getHashAndSearch())
+      setSearchAndHash(getSearchAndHash())
     })
   }
 
@@ -141,7 +141,7 @@ export function Router(props: RouterProps) {
         navigate,
         params,
         location: loc,
-        setHashAndSearch,
+        setSearchAndHash,
         setPathname,
         setQuery,
         query,

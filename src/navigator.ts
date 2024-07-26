@@ -1,6 +1,6 @@
 import { Accessor, Setter, batch } from 'solid-js'
 import { useRouterContext } from './Router'
-import { getHashAndSearch, isValidPath } from './utils/utils'
+import { getSearchAndHash, isValidPath } from './utils/utils'
 import { RouteWithoutChildren } from './Route'
 import { reconcile } from 'solid-js/store'
 
@@ -13,7 +13,7 @@ export const createNavigate = (
   routes: Accessor<RouteWithoutChildren[]>,
   pathname: Accessor<string>,
   setPathname: Setter<string>,
-  setHashAndSearch: Setter<string>,
+  setSearchAndHash: Setter<string>,
 ) => {
   return (path: string, options?: NavigateOptions) => {
     let newPath = path
@@ -43,7 +43,7 @@ export const createNavigate = (
 
     batch(() => {
       setPathname(location.pathname)
-      setHashAndSearch(getHashAndSearch())
+      setSearchAndHash(getSearchAndHash())
     })
   }
 }

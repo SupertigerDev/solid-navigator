@@ -9,7 +9,7 @@ export const isValidPath = (routes: Accessor<RouteWithoutChildren[]>, pathname: 
   })
 }
 
-export const getHashAndSearch = () => location.hash + location.search
+export const getSearchAndHash = () => location.search + location.hash
 
 // Code is borrowed from @solidjs/router
 export function expandOptionals(pattern: string): string[] {
