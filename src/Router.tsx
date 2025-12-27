@@ -173,7 +173,9 @@ const flattenedRoutes = (routes: RouteObject[]) => {
 
 const flattenedRoute = (route: RouteWithMergedComponents | RouteObject) => {
   const routes: RouteWithMergedComponents[] = []
-  const components = route.components || {}
+  let components: Record<string, (() => JSX.Element) | undefined> = {
+    ...(route.components || {}),
+  }
 
   let lastComponent: undefined | (() => JSX.Element) = undefined
 
@@ -184,7 +186,7 @@ const flattenedRoute = (route: RouteWithMergedComponents | RouteObject) => {
   routes.push({
     ...route,
     components: { ...components },
-    mergedComponents: components,
+    mergedComponents: { ...components },
     component: route.component || lastComponent,
   })
 
@@ -194,8 +196,10 @@ const flattenedRoute = (route: RouteWithMergedComponents | RouteObject) => {
     const child = route.children[i]
     if (!child) continue
 
+    let childComponents = { ...components }
+
     if (child.components) {
-      Object.assign(components, child.components)
+      Object.assign(childComponents, child.components)
     }
 
     if (child.component) {
@@ -206,7 +210,8 @@ const flattenedRoute = (route: RouteWithMergedComponents | RouteObject) => {
       if (!child.component) {
         throw new Error('Route: No component for ' + child.path)
       }
-      components[child.path] = child.component
+      childComponents[child.path] = child.component
+      components = { ...childComponents }
       continue
     }
 
@@ -214,8 +219,8 @@ const flattenedRoute = (route: RouteWithMergedComponents | RouteObject) => {
       ...flattenedRoute({
         ...child,
         path: route.path + child.path,
-        components: { ...components },
-        mergedComponents: components,
+        components: { ...childComponents },
+        mergedComponents: { ...childComponents },
         component: child.component || lastComponent,
       }),
     )
