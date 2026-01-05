@@ -18,6 +18,7 @@ export const createNavigate = (
   return (path: string, options?: NavigateOptions) => {
     let newPath = path
     let currentPathname = pathname()
+    const currentSearchAndHash = getSearchAndHash()
 
     if (currentPathname.endsWith('/')) {
       currentPathname = currentPathname.slice(0, -1)
@@ -30,6 +31,9 @@ export const createNavigate = (
     if (newPath.startsWith('../')) {
       newPath = currentPathname + '/' + newPath
     }
+
+    const pathAndSearch = currentPathname + currentSearchAndHash
+    if (pathAndSearch === newPath) return
 
     if (options?.replace) {
       history.replaceState(options.state || null, '', newPath)
